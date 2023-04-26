@@ -40,6 +40,16 @@
                                 	2) 버튼은 submit
                                 	3) ch06_test_process.jsp로 입력한 데이터를 념겨주세요 
                                  -->
+                                 	<%
+                                 		String nullCheck = request.getParameter("nu");
+                                 		if(nullCheck != null && nullCheck.equals("1")){
+                                 		%>
+                                 			<script type="text/javascript">
+                                 				alert("아이디, 비밀번호, 이름 중 1개의 값이 누락되었습니다")
+                                 			</script>		
+                                 		<%
+                                 		}
+                                 	%>
                                  	<form action="ch06_test_process.jsp" name="member" method="post">
                                 		아이디 : <input type="text" name="id"><input type="button" value="중복확인"><br>
                                 		비밀번호 : <input type="text" name="pw"><br>
