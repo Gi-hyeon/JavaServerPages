@@ -65,8 +65,9 @@
                                 	String name = request.getParameter("name");
                                 	
                                 	if(id == null || id == "" || pw == null || pw == "" || name == null || name == ""){
-                                		out.println(" <script type='text/javascript'> alert('아이디, 비밀번호, 이름 중 1개의 값이 누락되었습니다')</script>");
-                                		out.println(" <script type='text/javascript'> location.href ='ch06_test.jsp' </script>");
+                                		response.sendRedirect("ch06_test.jsp?nu=1");
+                                		//out.println(" <script type='text/javascript'> alert('아이디, 비밀번호, 이름 중 1개의 값이 누락되었습니다')</script>");
+                                		//out.println(" <script type='text/javascript'> location.href ='ch06_test.jsp' </script>");
                                 	}
                                 	
                                 	String phone1 = request.getParameter("phone1");
