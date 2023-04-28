@@ -14,7 +14,7 @@
 	String author = request.getParameter("author");
 	String publisher = request.getParameter("publisher");
 	String releaseDate = request.getParameter("releaseDate");
-	String totalPages = request.getParameter("totalPages");
+	int totalPages = Integer.parseInt(request.getParameter("totalPages"));
 	String description = request.getParameter("description");
 	String category = request.getParameter("category");
 	String unitsInStock = request.getParameter("unitsInStock");
@@ -44,8 +44,10 @@
 	newBook.setUnitPrice(price);
 	newBook.setAuthor(author);
 	newBook.setPublisher(publisher);
-	newBook.setPublisher(releaseDate);
-	newBook.setPublisher(totalPages);
+	newBook.setReleaseDate(releaseDate);
+	newBook.setTotalPages(totalPages);
+	//newBook.setPublisher(releaseDate);
+	//newBook.setPublisher(totalPages);
 	newBook.setDescription(description);
 	newBook.setCategory(category);
 	newBook.setUnitsInStock(stock);
