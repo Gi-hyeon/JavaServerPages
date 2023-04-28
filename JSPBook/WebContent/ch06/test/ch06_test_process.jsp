@@ -1,3 +1,5 @@
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Map"%>
 <%@page import="java.util.Calendar"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core" prefix="c" %>
@@ -63,6 +65,8 @@
                                 	String id = request.getParameter("id");
                                 	String pw = request.getParameter("pw");
                                 	String name = request.getParameter("name");
+                                	 
+                                	
                                 	
                                 	if(id == null || id == "" || pw == null || pw == "" || name == null || name == ""){
                                 		response.sendRedirect("ch06_test.jsp?nu=1");
@@ -77,6 +81,7 @@
                                 	String gender = request.getParameter("gender");
                                 	String[] hobby = request.getParameterValues("hobby");
                                 	String comment = request.getParameter("comment");
+                                	
                                 %>	
                                		<p>아이디 : <%= id %></p>
                                 	<p>비밀번호 : <%= pw %></p>
