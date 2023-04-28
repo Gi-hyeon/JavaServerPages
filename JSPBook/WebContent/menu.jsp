@@ -5,4 +5,9 @@
 			<a class="navbar-brand" href="./welcome.jsp">HOME</a>
 		</div>
 	</div>
+	<div>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a href="addBook.jsp" class="nav-link">상품등록</a></li>
+		</ul>
+	</div>
 </nav>
