@@ -29,14 +29,20 @@
 			Book book = listOfBooks.get(i);
 	%>
 		<div class="row">
+			<img src="<%= request.getContextPath()%>/resources/images/<%= book.getFilename() %>" style="width: 16%;" >
 			<div class="col-md-10">	
 				<p><h5 ><b>[<%=book.getCategory()  %> <!-- 책 카테고리를 출력(category) -->] <%=book.getName() %> <!-- 책 제목을 출력(name) --></b></h5>
 				<p style="padding-top: 10px"> <%= book.getDescription() %>  <!-- 책 내용을 출력(description) --></p>
 				<p><%= book.getAuthor() %> <!-- 책 저자 출력(author) --> | <%= book.getPublisher() %> <!-- 책 출판사 출력(Publisher) --> | <%= book.getUnitPrice() %> <!-- 책 금액 출력(UnitPrice) -->원 </p>
+				<p><a href="./book.jsp?id=<%= book.getBookId() %>" class="btn btn-secondary" role="button"> 상세정보 &raquo;></a></p>
 			</div>	
-			<div class="col-md-2"  style="padding-top: 60px">						    			 
-				<a href="./book.jsp?id=<%= book.getBookId() %>" class="btn btn-secondary" role="button"> 상세정보 &raquo;></a>				
-			</div>				
+			
+			
+			<div class="col-md-2"  style="padding-top: 60px;">						    			 
+				<%-- <a href="./book.jsp?id=<%= book.getBookId() %>" class="btn btn-secondary" role="button"> 상세정보 &raquo;></a> --%>				
+			</div>	
+			
+						
 		</div>
 		<%
 		}
