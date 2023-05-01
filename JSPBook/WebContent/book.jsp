@@ -23,7 +23,10 @@
 	%>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-4">
+				<img alt="X" src=" <%= request.getContextPath() %>/resources/images/<%= book.getFilename() %>" style="width: 100%;">
+			</div>
+			<div class="col-md-8">	
 				<h4><b>[<%= book.getCategory() %> <!-- 책 카테고리 -->]<%= book.getName() %> <!-- 책 제목 --></b></h4>
 				<p><%= book.getDescription() %> <!-- 책 내용 --></p>
 				<p><b>도서코드 : </b><span class="badge badge-danger"><%= book.getBookId() %> <!-- 책 id --></span></p>

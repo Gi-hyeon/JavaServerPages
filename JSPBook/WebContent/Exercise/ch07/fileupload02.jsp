@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<form action="fileupload02_process.jsp" method="post" enctype="multipart/form-data">
-		파 일 : <input type="file"><br><br>
+	<form action="fileupload02_process2.jsp" method="post" enctype="multipart/form-data">
+		파 일 : <input type="file" name="fileName"><br><br>
 		
 		<input type="submit" value="전송하기">
 	</form>
