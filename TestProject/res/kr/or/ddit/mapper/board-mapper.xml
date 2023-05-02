@@ -7,4 +7,14 @@
 	<insert id="insertMember" parameterType="MemberVO">
 		insert into member(MEM_NO, MEM_ID, MEM_PW, MEM_NAME, MEM_REGDATE) values(seq_member.nextval, #{mem_id}, #{mem_pw}, #{mem_name}, sysdate)
 	</insert>
+	
+	<select id="idDuplication" parameterType="String" resultType="int">
+		select count(*) from member where mem_id = #{MEM_ID}
+	</select>
+	
+	<select id="selectMemberByIdPw" parameterType="String" resultType="MemberVO">
+		SELECT * FROM member WHERE mem_id = #{mem_id} AND mem_pw = #{mem_pw}
+	</select>
+	
+	
 </mapper>
