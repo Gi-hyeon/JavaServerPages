@@ -39,7 +39,7 @@ public class InsertMember extends HttpServlet {
 		String pw = request.getParameter("pw");
 		String name = request.getParameter("name");
 		
-		System.out.println("id : " + id + ", pw : " + pw + ", name : " + name);
+		System.out.println("Register : id : " + id + ", pw : " + pw + ", name : " + name);
 		
 		MemberVO vo = new MemberVO();
 		vo.setMem_id(id);
