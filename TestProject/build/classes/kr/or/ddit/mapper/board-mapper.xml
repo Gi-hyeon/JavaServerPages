@@ -17,4 +17,7 @@
 	</select>
 	
 	
+	<select id="selectAllBoard" resultType="boardVO">
+		select * from BOARD
+	</select>
 </mapper>
