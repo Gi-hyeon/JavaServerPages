@@ -22,8 +22,10 @@
 					success : function(res) {
 						if(res.flag == "success"){
 							alert("로그인 성공");
+							location.href = "main.jsp";
 						} else{
 							alert("존재하지 않는 회원입니다.");
+							location.href = "login.jsp";
 						}
 					},
 					error : function(xhr) {
