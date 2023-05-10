@@ -102,7 +102,6 @@
 		<web-resource-collection>
 			<web-resource-name>JSPBook</web-resource-name>
 			<url-pattern>/ch11/test/boardForm.jsp</url-pattern>
-			<http-method>POST</http-method>
 		</web-resource-collection>
 		<auth-constraint>
 			<description>프로그래밍적 시큐리티 보안 처리하기</description>
