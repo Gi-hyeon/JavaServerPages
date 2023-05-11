@@ -1,3 +1,5 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="java.util.HashMap"%>
 <%@page import="java.util.Map"%>
 <%@page import="java.util.Arrays"%>
@@ -38,25 +40,9 @@
                                     </h6>
                                 </div>
                                 <div class="card-body">
-                               	<!-- 
-                               		문제)
-                               		
-                               		406호 전원의 이름을 ','로 구분하여 각각 나눈 후,
-                               		-----------------------------------
-                               		'김'씨 성을 가진 사람 몇명 : 3
-                               		'박'씨 성을 가진 사람 몇명 : 4
-                               		'이'씨 성을 가진 사람 몇명 : 5
-                               		...
-                               		...
-                               		-----------------------------------
-                               		
-                               		** 406호 전원의 이름을 넣을 때 스크립틀릿으로 활용해도 무방
-                               		     또는 JSTL로 바로 값을 넣어도 무방
-                               		     
-                               		1. JSTL을 이용하여 작성해주세요.
-                               	 -->
-                               	 <%
-                               	 	String[] nameArr = {
+                                <%
+                                	List<String> list = new ArrayList<String>();
+                               	 	String[] names = {
                                	 			"전지혜", "신국현", "이지영", "김지완", "이성일", "신현근",
                                	 			"박정수", "변정민", "정은지", "조성희", "박윤수", "조윤재",
                                	 			"정재균", "박승우", "황지현", "김민정", "김동혁", "고영우",
@@ -64,56 +50,45 @@
                                	 			"구기현", "전다미", "오대환", "배문기", "유이현",
                                	 			};
                                	 	
-                               	 	Map<String, Integer> map = new HashMap<>();
-                               	 	
-                               	 	String names = Arrays.toString(nameArr).substring(1, Arrays.toString(nameArr).length()-1);
-                               		//System.out.println(names);
+                               	 	for(int i=0; i<names.length; i++){
+                               	 		list.add(names[i]);
+                               	 	}
+                               	 	HashMap<String, Integer> map = new HashMap<String, Integer>();
                                	 %>
-                               	 	
-									<c:set var="nameArr" value="<%= names %>"/>
-                               	 	<c:set var="texts" value="${fn:split(nameArr, ', ') }"/>
-                               	    <c:set var="map" value="<%=map %>"/>
                                	 
-									<c:forEach var="i" begin="0" end="${fn:length(texts)-1 }">
-	                               	 	<c:set var="sName" value="${fn:substring(texts[i], 0, 1) }"></c:set>
+                               	 	<c:set var="map" value="<%=map %>"></c:set>
+                               	 	<c:forEach var="item" items="<%=list %>">
+                               	 		<c:out value="${item }"></c:out>
 	                               	 	
-	                               	 	
-	                               	 	
+	                               	 	<c:set var="sName" value="${fn:substring(item, 0, 1) }"/>
 	                               	 	
 	                               	 	<%-- 
-	                               	 	<c:out value="${sName }"></c:out><br>
-	                               	 	
-	                               	 	
-	                               	 	<c:if test="${map.containsKey(sName) }">
-	                               	 		if test -> <c:out value="${sName }"/> <br>
-	                               	 	</c:if>
-	                               	 	
-	                               	 	<c:if test="${not map.containsKey(sName) }">
-	                               	 		not if test -> <c:out value="${sName }"></c:out> <br>
-	                               	 	</c:if>
+	                               	 	성 체크 : <c:out value="${sName }"></c:out>
 	                               	 	 --%>
-	                               	 	
-										<c:set target="${map }" property="${sName }" value="${map[sName] + 1 }"/>
 	                               	 	 
-										<%-- <c:set target="${map }" property="${sName }" value="${map.get(sName) + 1 }"/> --%>
- 									<%-- <c:if test="${not empty sName}">
- 										    <c:if test="${not empty namesCount[sName]}">
- 										        <c:set target="${namesCount}" property="${sName}" value="${namesCount[sName]+1}" />
- 										    </c:if>
- 										    <c:if test="${empty namesCount[sName]}">
- 										        <c:set target="${namesCount}" property="${sName}" value="1" />
- 										    </c:if>
- 										</c:if> --%>
-
-
-									</c:forEach>
-
-									<c:forEach var="entry" items="${map}">
-										'${entry.key}'씨 성을 가진 사람 몇명 : ${entry.value} <br>
-									</c:forEach>
-
-									
-									
+	                               	 	 
+	                               	 	 
+	                               	 	 
+                               	 	</c:forEach>
+                               	 	
+                               	 	
+                               	 	<%-- 
+                               	 	<c:forEach var="item" items="<%=list %>">
+                               	 		<c:choose>
+                               	 			<c:when test="${map.get(fn:substring(item, 0, 1)) == null }">
+                               	 				${map.put(fn:substring(item, 0, 1), 1) }
+                               	 			</c:when>
+                               	 			<c:otherwise>
+                               	 				${map.put(fn:substring(item, 0, 1), map.get(fn:substring(item, 0, 1)) + 1 }
+                               	 			</c:otherwise>
+                               	 		</c:choose>
+                               	 	</c:forEach>
+                               	 	 --%>
+                               	 	
+                               	 	<c:forEach var="item" items="<%=map.keySet() %>">
+                               	 		<c:out value="${item }"/> 씨 성을 가진 사람 수 : ${map.get(item) }
+                               	 	</c:forEach>
+                               	 
                                 </div>
                             </div>
                         </div>
