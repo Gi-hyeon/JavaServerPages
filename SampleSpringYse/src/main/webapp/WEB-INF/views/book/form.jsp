@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +10,7 @@
 <body>
 	<div class="jumbotron">
 		<div class="container">
-			<h1 class="display-3">ц╔ ╩Щ╪╨го╠Б</h1>
+			<h1 class="display-3">Л╠┘ Л┐²Л└╠М∙≤Й╦╟</h1>
 		</div>
 	</div>
 
@@ -20,7 +20,7 @@
 				<div class="col-md-12 mb-2">
 					<div class="row">
 						<div class="col-md-2">
-							<label for="title" class="col-form-Label">а╕╦Я</label>
+							<label for="title" class="col-form-Label">Л═°К╙╘</label>
 						</div>
 						<div class="col-md-10">
 							<input type="text" class="form-control" name="title" id="title"/>
@@ -30,7 +30,7 @@
 				<div class="col-md-12 mb-2">
 					<div class="row">
 						<div class="col-md-2">
-							<label for="title" class="col-form-Label">д╚ев╟М╦╝</label>
+							<label for="title" class="col-form-Label">Л╧╢М┘▄ЙЁ═К╕╛</label>
 						</div>
 						<div class="col-md-10">
 							<input type="text" class="form-control" name="category" id="category"/>
@@ -40,15 +40,15 @@
 				<div class="col-md-12 mb-2">
 					<div class="row">
 						<div class="col-md-2">
-							<label for="title" class="col-form-Label">╟║╟щ</label>
+							<label for="title" class="col-form-Label">Й╟─Й╡╘</label>
 						</div>
 						<div class="col-md-10">
 							<input type="text" class="form-control" name="price" id="price"/>
 						</div>
 					</div>
 				</div>
-				<button type="submit" class="btn btn-warning">╣Н╥о</button>
-				<a href="/book/list.do" class="btn btn-primary">╦Я╥о</a>
+				<button type="submit" class="btn btn-warning">К⌠╠К║²</button>
+				<a href="/book/list.do" class="btn btn-primary">К╙╘К║²</a>
 			</div>
 		</form>
 	</div>
