@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,15 @@ public class BoardRetrieveController {
 		
 		// 페이징 및 검색이 적용된 목록 조회
 		PaginationInfoVO<BoardVO> pagingVO = new PaginationInfoVO<BoardVO>();
+		
+		// 해당 searchWord가 값이 있으면 isNotBlank이기 때문에 조건이 참이 된다는 뜻
+		// 검색 키워드가 이씅면 검색을 한 거고, 키워드가 없으면 검색을 하지 않은 것
+		if (StringUtils.isNotBlank(searchWord)) {
+			pagingVO.setSearchType(searchType);
+			pagingVO.setSearchWord(searchWord);
+			model.addAttribute("searchType", searchType);
+			model.addAttribute("searchWord", searchWord);
+		}
 		
 		pagingVO.setCurrentPage(currentPage);
 		// 목록 총 게시글 수 가져오기

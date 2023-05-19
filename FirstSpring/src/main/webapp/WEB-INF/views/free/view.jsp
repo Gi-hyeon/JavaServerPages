@@ -3,6 +3,25 @@
 <html>
 <head>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/bootstrap.min.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/ckeditor/ckeditor.js"></script>
+<script src="${pageContext.request.contextPath}/resources/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+	CKEDITOR.replace("boContent");
+	CKEDITOR.config.allowedContent = true;
+	
+	var deleteBtn = $('#deleteBtn');
+	var updateBtn = $('#updateBtn');
+	var dForm = $('#dForm');
+	
+	deleteBtn.on('click', function(event) {
+		event.preventDefault();
+		if(confirm("정말 삭제하시겠습니까?")){
+			dForm.submit();
+		}
+	});
+})
+</script>
 <title>자유게시판 상세보기</title>
 </head>
 <body>
@@ -13,28 +32,32 @@
 	</div>
 
 	<div class="container">
-		<form name="newUpdate" action="" class="form-horizontal" method="post">
+		<form name="newUpdate" action="/free/update.do" class="form-horizontal" method="post" id="nForm">
+			<input type="hidden" name="boNo" value="${free.boNo }">
 			<div class="form-group row">
 				<label class="col-sm-2 control-label" >제목</label>
 				<div class="col-sm-5">
-					<input name="subject" class="form-control"	value="" >
+					<input name="boTitle" class="form-control"	value="${free.boTitle }" >
 				</div>
 			</div>
 			<div class="form-group row">
 				<label class="col-sm-2 control-label" >내용</label>
 				<div class="col-sm-8" style="word-break: break-all;">
-					<textarea name="content" class="form-control" cols="50" rows="5"></textarea>
+					<textarea name="boContent" class="form-control" cols="50" rows="5">${free.boContent }</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<div class="col-sm-offset-2 col-sm-10 ">
 					<p>
-						<a	href=""	class="btn btn-danger"> 삭제</a> 
-						<input type="submit" class="btn btn-success" value="수정 ">
-						<a href="" class="btn btn-primary"> 목록</a>
+						<a href="" class="btn btn-danger" id="deleteBtn"> 삭제</a> 
+						<input type="submit" class="btn btn-success" value="수정 " id="updateBtn">
+						<a href="/free/list.do" class="btn btn-primary"> 목록</a>
 					</p>
 				</div>
 			</div>
+		</form>
+		<form action="/free/delete.do" method="post" id="dForm">
+			<input type="hidden" name="boNo" value="${free.boNo }">
 		</form>
 		<hr>
 	</div>

@@ -139,7 +139,7 @@ public class PaginationInfoVO<T> {	// 원하는 타입이 있으면 그 타입�
 		if (startPage > 1) {
 			html.append("<li class='page-item'><a href='' class='page-link' data-page='"
 					+(startPage - blockSize)+"'>Prev</a></li>");
-		}
+		} 
 		
 		for (int i = startPage; i <= (endPage < totalPage ? endPage : totalPage); i++) {
 			if (i == currentPage) {

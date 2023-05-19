@@ -2,22 +2,25 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Board">
-	
-	<sql id="boardSearch">
+<mapper namespace="Free">
+	<sql id="freeSearch">
 		<if test="searchType != null and searchType == 'title'">
 			and (botitle like '%'||#{searchWord}||'%')
 		</if>
 		<if test="searchType != null and searchType == 'writer'">
 			and (bowriter like '%'||#{searchWord}||'%')
 		</if>
+		<if test="searchType != null and searchType == 'titleWriter'">
+			and (botitle like '%'||#{searchWord}||'%')
+			or (bowriter like '%'||#{searchWord}||'%')
+		</if>
 	</sql>
-	
-	<insert id="insertBoard" parameterType="boardVO" useGeneratedKeys="true">
+
+	<insert id="insertFree" parameterType="freeVO" useGeneratedKeys="true">
 		<selectKey keyProperty="boNo" order="BEFORE" resultType="int">
-			select seq_board.nextval from dual
+			select seq_free.nextval from dual
 		</selectKey>
-		insert into board(
+		insert into free(
 			bono, botitle, bocontent, bowriter, bodate
 		)values(
 			#{boNo}, #{boTitle}, #{boContent}, #{boWriter}, sysdate
@@ -25,22 +28,31 @@
 	</insert>
 	
 	<update id="incrementHit" parameterType="int">
-		update board
+		update free
 		set
 			bohit = bohit + 1
-		where bono = #{boNo}
+		where
+			bono = #{boNo}
 	</update>
 	
-	<select id="selectBoard" parameterType="int" resultType="boardVO">
+	<select id="selectFree" parameterType="int" resultType="freeVO">
 		select
 			bono, botitle, bocontent, bowriter, bodate, bohit
 		from
-			board
+			free
 		where bono = #{boNo}
 	</select>
 	
-	<update id="updateBoard" parameterType="boardVO">
-		update board
+	<delete id="deletefree" parameterType="int">
+		delete
+		from
+			free
+		where
+			bono = #{boNo}
+	</delete>
+	
+	<update id="updateFree" parameterType="freeVO">
+		update free
 		set
 			botitle = #{boTitle},
 			bocontent = #{boContent},
@@ -48,29 +60,14 @@
 		where bono = #{boNo}
 	</update>
 	
-	<delete id="deleteBoard" parameterType="int">
-		delete 
-		from board
-		where bono = #{boNo}
-	</delete>
-	
-	<select id="selectBoardList" resultType="boardVO">
-		select
-			bono, botitle, bocontent, bowriter, 
-			to_char(bodate, 'yy-mm-dd hh24:mi:ss') bodate, bohit
-		from board
-		where 1=1
-		order by bono desc
-	</select>
-	
-	<select id="selectBoardCount" parameterType="pagingVO" resultType="int">
+	<select id="selectFreeCount" parameterType="freeVO" resultType="int">
 		select count(bono)
-		from board
+		from free
 		where 1=1
-		<include refid="boardSearch"/>
+		<include refid="freeSearch"/>
 	</select>
 	
-	<select id="selectBoardList2" parameterType="pagingVO" resultType="boardVO">
+	<select id="selectFreeList" parameterType="pagingVO" resultType="freeVO">
 		select b.*
 		from(
 			select
@@ -79,14 +76,18 @@
 				select
 					bono, botitle, bocontent, bowriter, 
 					to_char(bodate, 'yy-mm-dd hh24:mi:ss') bodate, bohit
-				from board
+				from free
 				where 1=1
-				<include refid="boardSearch"/>
+				<include refid="freeSearch"/>
 				order by bono desc
 			) a
 		) b
 		<![CDATA[
 			where b.rnum >= #{startRow} and b.rnum <= #{endRow}
 		]]>
+	</select>
+	
+	<select id="freeCount" resultType="int">
+		select count(bono) from free
 	</select>
 </mapper>

@@ -2,22 +2,26 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="Board">
+<mapper namespace="Notice">
 	
-	<sql id="boardSearch">
+	<sql id="noticeSearch">
 		<if test="searchType != null and searchType == 'title'">
 			and (botitle like '%'||#{searchWord}||'%')
 		</if>
 		<if test="searchType != null and searchType == 'writer'">
 			and (bowriter like '%'||#{searchWord}||'%')
 		</if>
+		<if test="searchType != null and searchType == 'titleWriter'">
+			and (botitle like '%'||#{searchWord}||'%')
+			or (bowriter like '%'||#{searchWord}||'%')
+		</if>
 	</sql>
 	
-	<insert id="insertBoard" parameterType="boardVO" useGeneratedKeys="true">
+	<insert id="insertNotice" parameterType="noticeVO" useGeneratedKeys="true">
 		<selectKey keyProperty="boNo" order="BEFORE" resultType="int">
-			select seq_board.nextval from dual
+			select seq_notice.nextval from dual
 		</selectKey>
-		insert into board(
+		insert into notice(
 			bono, botitle, bocontent, bowriter, bodate
 		)values(
 			#{boNo}, #{boTitle}, #{boContent}, #{boWriter}, sysdate
@@ -25,22 +29,31 @@
 	</insert>
 	
 	<update id="incrementHit" parameterType="int">
-		update board
+		update notice
 		set
 			bohit = bohit + 1
-		where bono = #{boNo}
+		where
+			bono = #{boNo}
 	</update>
 	
-	<select id="selectBoard" parameterType="int" resultType="boardVO">
+	<select id="selectNotice" parameterType="int" resultType="noticeVO">
 		select
 			bono, botitle, bocontent, bowriter, bodate, bohit
 		from
-			board
+			notice
 		where bono = #{boNo}
 	</select>
 	
-	<update id="updateBoard" parameterType="boardVO">
-		update board
+	<delete id="deleteNotice" parameterType="int">
+		delete
+		from
+			notice
+		where
+			bono = #{boNo}
+	</delete>
+	
+	<update id="updateNotice" parameterType="noticeVO">
+		update notice
 		set
 			botitle = #{boTitle},
 			bocontent = #{boContent},
@@ -48,29 +61,14 @@
 		where bono = #{boNo}
 	</update>
 	
-	<delete id="deleteBoard" parameterType="int">
-		delete 
-		from board
-		where bono = #{boNo}
-	</delete>
-	
-	<select id="selectBoardList" resultType="boardVO">
-		select
-			bono, botitle, bocontent, bowriter, 
-			to_char(bodate, 'yy-mm-dd hh24:mi:ss') bodate, bohit
-		from board
-		where 1=1
-		order by bono desc
-	</select>
-	
-	<select id="selectBoardCount" parameterType="pagingVO" resultType="int">
+	<select id="selectNoticeCount" parameterType="noticeVO" resultType="int">
 		select count(bono)
-		from board
+		from notice
 		where 1=1
-		<include refid="boardSearch"/>
+		<include refid="noticeSearch"/>
 	</select>
 	
-	<select id="selectBoardList2" parameterType="pagingVO" resultType="boardVO">
+	<select id="selectNoticeList" parameterType="pagingVO" resultType="noticeVO">
 		select b.*
 		from(
 			select
@@ -79,14 +77,18 @@
 				select
 					bono, botitle, bocontent, bowriter, 
 					to_char(bodate, 'yy-mm-dd hh24:mi:ss') bodate, bohit
-				from board
+				from notice
 				where 1=1
-				<include refid="boardSearch"/>
+				<include refid="noticeSearch"/>
 				order by bono desc
 			) a
 		) b
 		<![CDATA[
 			where b.rnum >= #{startRow} and b.rnum <= #{endRow}
 		]]>
+	</select>
+	
+	<select id="noticeCount" resultType="int">
+		select count(bono) from notice
 	</select>
 </mapper>
