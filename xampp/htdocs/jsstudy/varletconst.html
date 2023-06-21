@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+</body>
+<script>
+    // var vs let vs const (let과 const는 나중(ES6)에 나옴)
+    // var는 function 키워드에 갇히고, let은 {}에 갇힌다.
+
+    /* 
+    for(var i=0; i<=10; i++){
+         console.log(i);
+    }
+    alert("체크 : " + i);   // 11
+     */
+
+    /* 
+    for(var i=0; i<=10; i++){
+        console.log(i);
+    }
+    alert("체크 : " + i);   // let으로 작성하면 java랑 똑같이 Error 발생
+    */
+
+    /* 
+    var i = 100;
+    function test(){    // var의 영역(scope)을 나누는 기준은 무조건 function 키워드
+        var i = 10;     // 지역 변수
+        alert("체크 : " + i);
+    }
+    alert("체크 : " + i);   // 100
+    test(); // 10
+     */
+
+    /* 
+     const cTest = "흥";    // const도 원시타입, 객체타입을 구분해서 사용법을 기억해야한다.
+     cTest = "치";  //?
+     alert("체크 : " + cTest)   // 상수선언이라 값바꾸면 에러 ex)파이 등등
+    */
+
+    const cTest = {name : "정수", age : 100};    // const도 원시타입, 객체타입을 구분해서 사용법을 기억해야한다.
+
+    cTest.age = 50; // 잘 됌 -> 객체타입은 잘 변함
+
+    cTest = {name : "안정수"};  // 속성변경은 같지만 객체 자체는 못바꿈
+    // const = 객체 -> 박스 본드칠함     박스자체는 못바꾸지만 안에 내용물은 변경 가능
+
+    console.log(cTest);
+
+</script>
