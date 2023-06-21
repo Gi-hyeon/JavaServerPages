@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+</body>
+<script>
+    const calculator = function(pOp){
+        if(pOp == '+'){
+            return function(pA, pB){
+                return pA + pB;
+            }
+        }
+        if(pOp == '-'){
+            return function(pA, pB){
+                return pA - pB;
+            }
+        }
+        if(pOp == '*'){
+            return function(pA, pB){
+                return pA * pB;
+            }
+        }
+    }
+
+    console.log(calculator('+')(3, 7));
+</script>
