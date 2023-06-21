@@ -36,13 +36,26 @@
      alert("체크 : " + cTest)   // 상수선언이라 값바꾸면 에러 ex)파이 등등
     */
 
+    /* 
     const cTest = {name : "정수", age : 100};    // const도 원시타입, 객체타입을 구분해서 사용법을 기억해야한다.
 
     cTest.age = 50; // 잘 됌 -> 객체타입은 잘 변함
 
     cTest = {name : "안정수"};  // 속성변경은 같지만 객체 자체는 못바꿈
     // const = 객체 -> 박스 본드칠함     박스자체는 못바꾸지만 안에 내용물은 변경 가능
-
     console.log(cTest);
+    */
+
+    /* 
+    let myObj = {name : "로제"};
+    let yourObj = myObj;
+    let testArr = [];
+    testArr.push(yourObj);
+    myObj = {name : "정수"};    // 이렇게 작성하면 큰 문제가 발생 -> 메모리 리크(memory leak)
+                                // {name : "로제"}를 찾을 수 없게 되어버린다.
+
+    console.log(yourObj);
+    console.log(testArr[0]);
+     */
 
 </script>
