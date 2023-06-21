@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <h1 id="dajim">난 최고의 프로그래밍</h1>
+</body>
+<script>
+    // document.querySelector("#dajim").style.color = "blue";
+    // 배열식 접근법
+    var color = "color";
+    document.querySelector('#dajim').style[color] = "blue";
+    color = "background-color";
+    document.querySelector('#dajim').style[color] = "yellow";
+
+    // JSON (JavaScript Object Notation) 거의 데이터통신 표준포맷
+
+    /*
+    // 기본
+    let name = "merong";
+    var jungsu = {      // new Object()
+        name,           // merong 출력 -> 권장하지 않음
+        role : "개그맨",
+        songs : ["뽀뽀뽀", "뽀로로"]
+
+        // name : "정수",  // 속성명은 변수처리 안된다. -> 문자열 처리되기 때문에
+        // role : "개그맨",
+        // songs : ["뽀뽀뽀", "뽀로로"]
+
+        // "name" : "정수",
+        // "role" : "개그맨",
+        // "songs" : ["뽀뽀뽀", "뽀로로"]
+
+        // console.log(jungsu);
+    };
+    */
+
+    // 배열식 접근법 -> 무지 막지 중요 -> 무조건 연습하자(연봉↑)
+
+    var name = "음하하하";
+    var jungsu = {
+        [name] : "정수",
+        ["1"] : "개그맨",
+        ["2"] : ["뽀뽀뽀", "뽀로로"]
+
+        // ["0"] : "정수",
+        // ["1"] : "개그맨",
+        // ["2"] : ["뽀뽀뽀", "뽀로로"]
+        // jungsu.3 = "ppp"; .숫자는 불가능, 배열식 접근법 추가 가능 -> 변수 선언 규칙 위반 (숫자를 변수명이 시작도리 수 없다.)
+
+        /* 
+        ["name"] : "정수",
+        ["role"] : "개그맨",
+        ["songs"] : ["뽀뽀뽀", "뽀로로"]
+         */
+    }
+
+    console.log(jungsu);
+    console.log(jungsu[1]);
+    console.log(jungsu[2]);
+
+</script>
