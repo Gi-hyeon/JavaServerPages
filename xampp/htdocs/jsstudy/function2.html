@@ -3,6 +3,7 @@
 <body>
 </body>
 <script>
+    // return 아무거나 다된다. 추천하지는 않음
     const calculator = function(pOp){
         if(pOp == '+'){
             return function(pA, pB){
@@ -22,4 +23,8 @@
     }
 
     console.log(calculator('+')(3, 7));
+    console.log(calculator('*')(3, 7));
+
+    // 3 + 7 - 4를 표현하면?    A - 4
+    console.log(calculator('-')(calculator('+')(3, 7), 4));
 </script>
