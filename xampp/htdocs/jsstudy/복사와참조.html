@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+    <input type="text" name="" id="merong" value="흥">
+</body>
+<script>
+    var ggg = "roze man man se!";      //   원시타입 문자열(string);
+    // var bbb = new String("kgb");
+    // 원시타입에 .을 붙이는 순간 Wrapper 객체로 자동으로 바뀜
+    alert(ggg.substring(0, 5)); // 이건 왜 가능할까?
+
+    var num = "7979797979";
+    alert(num.toLocaleLowerCase);
+    alert(Number.MAX_SAFE_INTEGER);
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<script>
+    var test = document.querySelector("#merong");   // text객체     원시타입은 속성이나 메서드X
+    // test = "치뿡"; 안바뀜
+    alert(typeof(test));
+    //test.value = "치뿡";    // 바뀜
+</script>
+ -->
+
+<!-- 
+<script>
+    // 복사와 참조 모르면 개발자 할 수 없음!
+    // 원시타입(primitive) (string, number, boolean)은 복사, 
+    // 객체(Object)는 참조(Reference)로 동작!, 배열, JSON, 함수
+    // let, var, const
+
+    // aaa = "메롱", bbb  -> 이렇게 작성하면 욕 ㅈㄴ 먹음
+    
+    /* 
+    "use strict";  //엄격 모드 적용  이렇게 작성해도됌
+    aaa = "메롱";
+    bbb = "흥";
+    */
+
+    var aaa = "메롱";
+    var bbb = aaa;
+
+    bbb = "안메롱";
+    //alert("체크 : " + aaa);    // 복사 되었기 때문에 "메롱"이 뜬다.
+    
+    var black = {
+        name : "제니"
+    };
+    
+    var pink = black;
+    pink.name = "로제";
+    alert("체크 : " + black.name);    // black과 pink는 같은 곳을 가리키는 포인터!(참조) "로제"가 뜬다.
+</script>
+ -->
