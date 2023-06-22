@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+</body>
+<script>
+    // 자바스크립트 function 키워드는 class의 의미도 가지고 있다.
+    // 실제 class 키워드가 추가되었지만, 내부적으로 function 키워드로
+    // 바뀌어 실행되기 때문에 순수 자바스크립트(바닐라)에선 그냥
+    // function 키워드를 쓰는 것이 일반적!
+
+    // 배열을 직접 한번 만들어보자 배열에서 가장 중요한 속성은 length
+    
+    function MyArray(){
+        this.length = 0;    // 초기값 0
+        
+        // 클래스의 메서드 공유영역(prototype), 사실 속성을 넣어도 되는데 의미가 없다
+        MyArray.prototype.push = function(pElem){
+            this[this.length] = pElem;  // 배열식 접근법
+            this.length++;
+            return this;    // 이걸 붙이면 메소드 체이닝이 된다.
+        }
+        // return this;        // 생략가능, class의 의미로 사용될 때 return this; 생략되어 있다.
+
+        MyArray.prototype.forEach = function(pCallbak){
+            for(let i=0; i<this.length; i++){
+                pCallbak(this[i], i)
+            }
+        }
+    }
+
+    /* 
+    let aaa = new MyArray();
+    aaa.push("가나");
+    console.log("aaa", aaa);
+    */
+
+    /* 
+    let aaa = new MyArray();
+    console.log("체크", aaa.push("가나"));  // return this가 생략되면 undefined가 발생
+    */
+   
+    let aaa = new MyArray();
+    aaa.push("가나").push("다라").push("마바").push(["가", "나", "다"]);
+    console.log("체크", aaa);       // 메서드 체이닝 구현 가능
+
+    aaa.forEach(function(pVal, pInx){
+        alert(`${pInx} ==> ${pVal}`);
+    });
+
+
+    /*
+    let bbb = new MyArray();
+    bbb.push("다라");
+    console.log("bbb", bbb);
+    */
+</script>
