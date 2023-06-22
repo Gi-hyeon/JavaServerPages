@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="mSch" value=""> <input id="mBtn" type="button" value="이미지검색"><br>
+    <div id="disp"></div>
+
+    <script>
+        const mySch = document.querySelector('#mSch');
+        const myBtn = document.querySelector('#mBtn');
+        const myDisp = document.querySelector('#disp');
+
+        const preURL = "https://www.flickr.com/services/feeds/photos_public.gne?tags=";
+        const postURL = "&format=json";
+
+        myBtn.addEventListener('click', function(){
+            let schWord = mySch.value;
+            let realURL = `${preURL}${schWord}${postURL}`;
+            console.log("체크 : ", realURL);    // 디버깅용
+
+            let myScript = document.createElement('script');
+            myScript.src = realURL;
+            document.head.appendChild(myScript);
+        });
+
+        // 호출하는 함수를 미리 만들어준다. 멋진 말로 JSONP(JSON Padding)이라 부른다
+        function jsonFlickrFeed(pArg){
+            console.log("체크", pArg);
+            myDisp.innerHTML = "";      // $('#myDisp').empty() => $('#myDisp').html("");
+            let items = pArg.items;
+            for(let i=0; items.length; i++){
+                let imgURL = items[i].media.m;
+                let imgTag = document.createElement('img');     //$('<img>') <- jQuery 때문
+                imgTag.width = 300;
+                imgTag.height = 300;
+                imgTag.src = imgURL;
+                myDisp.appendChild(imgTag); // 실제 document에 추가
+            }
+
+        }
+    </script>
+
+
+
+    <script src="https://www.flickr.com/services/feeds/photos_public.gne?tags=아이린&format=json"></script>
+</body>
+</html>
