@@ -20,13 +20,34 @@
             return this;    // 이걸 붙이면 메소드 체이닝이 된다.
         }
         // return this;        // 생략가능, class의 의미로 사용될 때 return this; 생략되어 있다.
-
+        
         MyArray.prototype.forEach = function(pCallbak){
             for(let i=0; i<this.length; i++){
-                pCallbak(this[i], i)
+                pCallbak.call(this, this[i], i)
             }
+            return this;
+        }
+
+        // map하고 reduce는 빅데이터 처리에서 많이 쓰는 메서드! (보통 맵리라고 짧게 부름)
+        MyArray.prototype.map = function(pCallbak){
+            for(let i=0; i<this.length; i++){
+                    this[i] = pCallbak.call(this, this[i], i)
+            }
+            return this;
         }
     }
+    let aaa = new MyArray();
+    aaa.push("가나").push("다라").push("마바").push(["가", "나", "다"]);
+    aaa.map(function(pVal, pIndex){
+        if(pVal == "다라"){
+            return pVal + " !!!";
+        }
+        if(pIndex == 2){
+            return pVal + pIndex + " ???";
+        }
+        return pVal;    // 상관없는 건 넘겨받은대로 가공없이 다시 되돌려줌
+    })
+    console.log("체크", aaa);
 
     /* 
     let aaa = new MyArray();
@@ -38,14 +59,27 @@
     let aaa = new MyArray();
     console.log("체크", aaa.push("가나"));  // return this가 생략되면 undefined가 발생
     */
-   
-    let aaa = new MyArray();
-    aaa.push("가나").push("다라").push("마바").push(["가", "나", "다"]);
-    console.log("체크", aaa);       // 메서드 체이닝 구현 가능
-
+   /* 
+   let aaa = new MyArray();
+   aaa.push("가나").push("다라").push("마바").push(["가", "나", "다"]); 
+   */
+    
+    /* 
     aaa.forEach(function(pVal, pInx){
+        console.log("this체크", this);
         alert(`${pInx} ==> ${pVal}`);
-    });
+    }).forEach(function(val, index){
+        this[index] = this[index] + "만세";
+    }).push("푸쉬를 붙일 수 있을까?");
+    console.log("체크", aaa);       // 메서드 체이닝 구현 가능 
+    */
+
+    /* 
+    aaa.forEach(function(pVal, pInx){
+        console.log("this체크", this);
+        alert(`${pInx} ==> ${pVal}`);
+    }); 
+    */
 
 
     /*
