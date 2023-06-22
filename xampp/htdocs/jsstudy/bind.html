@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+</body>
+<script>
+    /*
+    function print(pMsg){
+        document.write(pMsg);
+    }
+    */
+
+    // const Mungi = {};
+    // 회사가서 bind를 이렇게 쓰면 고참이 안건드린다.
+    // var print = document.write;  // 안됨
+    var print = document.write.bind(document);
+
+    print("<h1>Document Write</h1>");
+
+    // document.write("<h1>Document Write</h1>");
+</script>
