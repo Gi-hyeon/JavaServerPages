@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+</body>
+<script>
+    // 자바의 ArrayList를 만들어보자, 배열과 거의 비슷하다.
+    function ArrayList(){
+        this.length = 0;
+        return this;
+    }
+
+    // add
+    ArrayList.prototype.add = function(pElem){
+        this[this.length] = pElem;
+        this.length++;
+        return this;
+    }
+    
+    // get
+    ArrayList.prototype.get = function(pIndex){
+        return this[pIndex];
+    }
+    
+    // set
+    ArrayList.prototype.set = function(pIndex, pValue){
+        this[pIndex] = pValue;
+    }
+    
+    // remove
+    ArrayList.prototype.remove = function(pIndex){
+        console.log("remove : " + this[pIndex]);
+
+        delete this[pIndex];
+        this.length--;
+    }
+    
+    // clear
+    ArrayList.prototype.clear = function(){
+        for(let i=0; i<this.length; i++){
+            delete this[i];
+        }
+    }
+    
+    // size
+    ArrayList.prototype.size = function(){
+        console.log("? : ")
+        return this.length;
+    }
+
+    var testArrayList = new ArrayList();
+    testArrayList.add("ㄹㅈ").add("ㅈㄴ").add("ㄹㅅ").add("ㅈㅅ");
+    console.log("체크1", testArrayList);
+    
+    console.log("체크2", testArrayList.get(2));
+    
+    testArrayList.set(1, "ㅂㅇㅅ");
+    console.log("체크3", testArrayList);
+    
+    testArrayList.remove(3);
+    console.log("체크4", testArrayList);
+    
+    console.log("체크5", testArrayList.size());
+    
+    testArrayList.clear();
+    console.log("체크6", testArrayList);
+
+</script>
