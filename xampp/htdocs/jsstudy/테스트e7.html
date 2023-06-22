@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+</body>
+<script>
+    // callback 조금 연습
+    /* 
+    var SinHG = {};     // 네임스페이스용 빈 객체
+    SinHG.print = function(){
+        alert("ㅎㄱ");
+    } 
+    */
+
+    // 자바의 ArrayList를 만들어보자, 배열과 거의 비슷하다.
+    function ArrayList(){
+        this.length = 0;
+        return this;
+    }
+
+    // add
+    ArrayList.prototype.add = function(pElem){
+        this[this.length] = pElem;
+        this.length++;  // 초기값을 안 주고 ++하면 언디파인에 ++ 하는 꼴임 => NaN(Not a Number)
+        return this;
+    }
+    
+    // get
+    ArrayList.prototype.get = function(pIndex){
+        return this[pIndex];
+    }
+    
+    // set
+    ArrayList.prototype.set = function(pIndex, pValue){
+        this[pIndex] = pValue;
+        return this;    // 메서드 체이닝이 필요하다면 return this를 하자...
+    }
+    
+    // remove, 대충 삭제하면 index 번호가 구멍이 생김
+    ArrayList.prototype.remove = function(pIndex){
+        for(let i=pIndex; i<this.length-1; i++){
+            this[i] = this[i+1];    // pIndex 부터 뒤에 값 앞으로 땡기기
+        }
+        delete this[this.length - 1];
+        this.length--;
+
+        return this;
+    }
+    
+    // clear
+    ArrayList.prototype.clear = function(){
+        for(let i=0; i<this.length; i++){
+            delete this[i];
+        }
+
+        this.length = 0;
+
+        return this;    // 메서드 체이닝
+    }
+    
+    // size
+    ArrayList.prototype.size = function(){
+        return this.length;
+    }
+
+    var testArrayList = new ArrayList();
+    testArrayList.add("ㄹㅈ").add("ㅈㄴ").add("ㄹㅅ").add("ㅈㅅ");
+    console.log("체크1", testArrayList);
+    
+    console.log("체크2", testArrayList.get(2));
+    
+    testArrayList.set(1, "ㅂㅇㅅ");
+    console.log("체크3", testArrayList);
+    
+    testArrayList.remove(3);
+    console.log("체크4", testArrayList);
+    
+    console.log("체크5", testArrayList.size());
+    
+    testArrayList.clear();
+    console.log("체크6", testArrayList);
+
+</script>
