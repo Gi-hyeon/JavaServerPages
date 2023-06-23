@@ -2,6 +2,7 @@
 <meta charset="UTF-8">
 <body>
     <div id="disp"></div>
+    <button onclick="posSort()"></button>
 </body>
 <script>
     const blackPink = [
@@ -46,20 +47,51 @@
 
     // 자주 사용되는 문자열로 table 만들기
     // 배열식 접근법 중요!!!!!!! -> .접근법보다 속도가 느리기 때문에 특별한 상황에만 배열식 접근법 적용
-    var tblSTr = "<table border=2>";
-        tblSTr += 
-        `<tr>
-            <th>순번</th><th>이름</th><th>나이</th><th>직책</th>
-        </tr>`;
-    for(let i=0; i<jumins.length; i++){
-        tblSTr += "<tr>";
-        tblSTr += `<td>${i+1}</td>`;
-        tblSTr += `<td>${jumins[i].name}</td>`;
-        tblSTr += `<td>${jumins[i].age}</td>`;
-        tblSTr += `<td>${position[jumins[i].pos]}</td>`;    // 잊으면 안됨! 배열식 접근법 중요
-        tblSTr += "</tr>";
+    function strInner(){
+        var tblSTr = "<table border=2>";
+            tblSTr += 
+            `<tr>
+                <th>순번</th><th onclick="nameSort()">이름</th><th onclick="ageSort()">나이</th><th onclick="posSort()">직책</th>
+            </tr>`;
+        for(let i=0; i<jumins.length; i++){
+            tblSTr += "<tr>";
+            tblSTr += `<td>${i+1}</td>`;
+            tblSTr += `<td>${jumins[i].name}</td>`;
+            tblSTr += `<td>${jumins[i].age}</td>`;
+            tblSTr += `<td>${position[jumins[i].pos]}</td>`;    // 잊으면 안됨! 배열식 접근법 중요
+            tblSTr += "</tr>";
+        }
+    
+        tblSTr += "</table>";
+        myDisp.innerHTML = tblSTr;
+    }
+    strInner();
+
+    function nameSort(){
+        jumins.sort(function(a, b){
+            if(a.name > b.name){ return 1; }
+            if(a.name == b.name){ return 0; }
+            if(a.name < b.name){ return -1; }
+        });
+        strInner();
+        console.log("nameSort");
     }
 
-    tblSTr += "</table>";
-    myDisp.innerHTML = tblSTr;
+    function ageSort(){
+        jumins.sort(function(a, b){
+            return a.age - b.age;
+        });
+        strInner();
+        console.log("ageSort");
+    }
+    
+    function posSort(){
+        jumins.sort(function(a, b){
+            if(a.pos < b.pos){ return 1; }
+            if(a.pos == b.pos){ return 0; }
+            if(a.pos > b.pos){ return -1; }
+        });
+        strInner();
+        console.log("positionSort");
+    }
 </script>
