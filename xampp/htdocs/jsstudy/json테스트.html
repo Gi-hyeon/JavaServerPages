@@ -4,6 +4,29 @@
     <div id="disp"></div>
 </body>
 <script>
+    const blackPink = [
+        {name : "로제", age : 26, song : "다"},
+        {name : "제니", age : 27, song : "나"},
+        {name : "리사", age : 26, song : "마"},
+        {name : "지수", age : 28, song : "라"},
+        {name : "지혜", age : 25, song : "가"}
+    ];
+
+    // a - b 로 적으면 객체가 들어와서 불가능
+    blackPink.sort(function(a, b){
+
+        // return a.age - b.age;    // 숫자인 경우
+
+        // 문자열일 경우
+        if(a.name > b.name){ return 1; }
+        if(a.name == b.name){ return 0; }
+        if(a.name < b.name){ return -1; }
+        
+    })
+
+    console.log("나이순 정렬 : ",blackPink);
+
+
     const myDisp = document.querySelector('#disp');
 
     const position = {
