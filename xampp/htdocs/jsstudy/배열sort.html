@@ -8,6 +8,68 @@
 <body>
 </body>
 <script>
+    // 배열 클래스
+    function MyArray(){
+        this.length = 0;
+    }
+
+    // pust 메서드
+    MyArray.prototype.push = function(pElem){
+        this[this.length] = pElem;
+        this.length++;
+        return this;    // 메서드 체이닝
+    }
+
+    // sort 메서드
+    MyArray.prototype.sort = function(pCallback){
+        for(j=0; j<this.length; j++){
+            for(let i=j+1; i<this.length; i++){
+                if(pCallback(this[j], this[i]) > 0){
+                    let temp = this[j];
+                    this[j] = this[i];
+                    this[i] = temp;
+                }
+            }
+        }
+    }
+
+    let testArray1 = new MyArray();
+    testArray1.push(2).push(6).push(3).push(1).push(4);
+    testArray1.sort(function(a, b){
+        return a - b;
+    })
+
+    console.log(testArray1);
+
+
+    // 배열 객체에 sort 메서드가 제공되고 있음
+    // const testArr = [1, 4, 6, 7, 2, 3];
+    const testArr = ["김동혁", "김민욱", "진현성", "정재균", "배문기"];
+
+    /* 
+    console.log("김동혁" - 0);
+    console.log("정재균" - 0);
+    console.log("김민욱" * 0);
+    console.log("진현성" % 0); 
+    */
+
+
+    console.log("홍".charCodeAt(0));
+    console.log("A".charCodeAt(0));
+    console.log("a".charCodeAt(0));
+    console.log("김동혁" > "정재균");   // 크기 비교는 내부적으로 아스키코드, 유니코드값으로 비교된다.
+
+
+    console.log("sort() : " + testArr.sort());  // default : 오름차순
+    console.log("sort() 내림차순 : " + testArr.sort(function(a, b){
+        // return b - a;
+        if(b > a) return 1;
+        if(b == a) return 0;
+        if(b < a) return -1;
+    })); 
+
+
+
     /* 
     // 스위치(switch)
     var a = 337;
@@ -20,8 +82,10 @@
     console.log(a + " " + b); 
     */
 
-    let testArr = [3, 6, 1, 2, 9, 7, 3, 2];
-
+   
+   /* 
+   let testArr = [3, 6, 1, 2, 9, 7, 3, 2];
+    // 버블 정렬
     for(j=0; j<testArr.length; j++){
         for(let i=j+1; i<testArr.length; i++){
             if(testArr[j] > testArr[i]){
@@ -32,7 +96,8 @@
         }
     }
     
-    alert("이중 포문으로 오름차순 처리 : " + testArr);
+    alert("이중 포문으로 오름차순 처리 : " + testArr); 
+    */
 
 
     // sort를 알려면 정렬 -> 최대값, 최소값
