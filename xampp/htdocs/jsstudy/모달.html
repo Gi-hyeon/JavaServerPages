@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #myModal{
+            position: fixed;    /* 모달은 자리가 고정되어 있어야한다. */
+            left: 0px;
+            top: 0px;
+            width: 100vw;       /* 사이즈 고정 */
+            height: 100vh;      /* 높이 고정 */
+            background-color: rgba(12, 12, 12, 0.5);
+            z-index: 100;       /* 클수록 앞으로 나옴 */
+            display: none;      /* 처음에는 보이면 안됨! */
+        }
+        #content{
+            width: 60%;
+            height: 50%;
+            margin: 20px auto;  /* 수평 중앙정렬 */
+            background-color: lightblue;
+        }
+        #menu{
+            text-align: right;  /* 오른쪽 정렬 */
+            font-size: 2em;     /* 기본 2배 */
+            
+        }
+    </style>    
+<body>
+    <!--모달 div는 별도로 밖으로 빼놓는 게 좋다. -->
+    <div id="myModal">
+        <div id="content">
+            <div id="menu"><button>X</button></div>
+            <div><h1>프로그래밍</h1></div>
+        </div>
+    </div>
+
+    <button onclick="fmodalOpen()">Button</button>
+    <!--
+        부트스트랩 모달X, 개발자라면 만들어써야한다. 
+        position, z-index, display, overflow, transform 등
+    -->
+</body>
+<script>
+    const mModal = document.querySelector('#myModal');
+    function fmodalOpen(){
+        mModal.style.display = "block";     // 눈에 보이게
+    }
+</script>
+</html>
