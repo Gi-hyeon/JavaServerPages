@@ -8,5 +8,63 @@
 <body>
 </body>
 <script>
+    /* 
+    // 스위치(switch)
+    var a = 337;
+    var b = 272;
+
+    var temp = a;
+    a = b;
+    b = temp;
+
+    console.log(a + " " + b); 
+    */
+
+    let testArr = [3, 6, 1, 2, 9, 7, 3, 2];
+
+    for(j=0; j<testArr.length; j++){
+        for(let i=j+1; i<testArr.length; i++){
+            if(testArr[j] > testArr[i]){
+                let temp = testArr[j];
+                testArr[j] = testArr[i];
+                testArr[i] = temp;
+            }
+        }
+    }
     
+    alert("이중 포문으로 오름차순 처리 : " + testArr);
+
+
+    // sort를 알려면 정렬 -> 최대값, 최소값
+    /* 
+    let testArr = [3, 6, 1, 2, 9, 7, 3, 2];
+    // let max = testArr[0];   // 첫 번째 값에 제일 크다고 가정
+    for(let i=1; i<testArr.length; i++){
+        if(testArr[0] < testArr[i]){
+            let temp = testArr[0];
+            testArr[0] = testArr[i];
+            testArr[i] = temp;
+        }
+        console.log(testArr);   // 돌아가는 걸 눈으로 보기(중요)
+                                // 디버깅을 상상으로 하는 건 안 좋은 버릇
+
+        if(max < testArr[i]){
+            max = testArr[i];
+        } 
+
+    }
+    for(let i=2; i<testArr.length; i++){
+        if(testArr[1] < testArr[i]){
+            let temp = testArr[1];
+            testArr[1] = testArr[i];
+            testArr[i] = temp;
+        }
+        console.log(testArr);   // 돌아가는 걸 눈으로 보기(중요)
+    }
+
+    // console.log("max : " + max);
+    console.log("첫 번째 자리에 가장 큰 숫자 : " + testArr);  
+    */
+
+
 </script>
