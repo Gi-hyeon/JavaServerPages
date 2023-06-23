@@ -22,29 +22,36 @@
         }
         #menu{
             text-align: right;  /* 오른쪽 정렬 */
-            font-size: 2em;     /* 기본 2배 */
             
+        }
+        button{
+            font-size: 2em;     /* 기본 2배 */
         }
     </style>    
 <body>
     <!--모달 div는 별도로 밖으로 빼놓는 게 좋다. -->
     <div id="myModal">
         <div id="content">
-            <div id="menu"><button>X</button></div>
+            <div id="menu"><button onclick="fmodalClose()">X</button></div>
             <div><h1>프로그래밍</h1></div>
         </div>
     </div>
 
-    <button onclick="fmodalOpen()">Button</button>
-    <!--
-        부트스트랩 모달X, 개발자라면 만들어써야한다. 
-        position, z-index, display, overflow, transform 등
-    -->
+    <div id="wrapper">
+        <button onclick="fmodalOpen()">Button</button>
+        <!--
+            부트스트랩 모달X, 개발자라면 만들어써야한다. 
+            position, z-index, display, overflow, transform 등
+        -->
+    </div>
 </body>
 <script>
     const mModal = document.querySelector('#myModal');
     function fmodalOpen(){
-        mModal.style.display = "block";     // 눈에 보이게
+        mModal.style.display = "block";     // 생기게
+    }
+    function fmodalClose(){
+        mModal.style.display = "none";     // 사라지게
     }
 </script>
 </html>
