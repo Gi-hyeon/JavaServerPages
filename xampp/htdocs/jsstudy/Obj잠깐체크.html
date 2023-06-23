@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+</body>
+<script>
+    // 아래 형식의 에러는 쉽게 해결할 수 있어야한다.    .이 문제
+    // Uncaught TypeError: Cannot read properties of null (reading 'appendChild') -> 오류발생
+    let myDisp = document.querySelector('#disp');
+    myDisp.appendChild(document.createElement('h1'));
+
+
+    const debug = true;  // 디버깅용 로그 제어 -> 필요에따라 true false를 이용하면서 디버깅함
+    // console.log 주의!(객체일 때 참조방식)
+    let testObj = {
+        name : "로제",
+        age : 26
+    }
+
+    /* 
+    // 고수들은 객체들을 복사! (복사하면 따로 논다.)
+    let testCopy = structuredClone(testObj);
+    // console.log("체크1 : ", testObj);
+    console.log("copy 체크1 : ", testCopy); 
+    */
+
+    if(debug){
+        let testCopy = structuredClone(testObj);    // structuredClone -> 객체일 경우 많이 헷갈리니 이거 사용
+        console.log("if문 안에서 체크1 : ", testCopy);  
+    }
+    
+    testObj.name = "제니";
+    testObj.age = 27;
+    /* 
+    let testCopy2 = structuredClone(testObj);   // 디버깅 할 때만 사용해야한다. 아니면 메모리차지 큼
+    // console.log("체크2 : ", testObj);   
+    console.log("copy 체크2 : ", testCopy2); 
+    */
+
+    if(debug){
+        let testCopy2 = structuredClone(testObj);
+        console.log("if문 안에서 체크2 : ", testCopy2); 
+    }
+
+
+</script>
