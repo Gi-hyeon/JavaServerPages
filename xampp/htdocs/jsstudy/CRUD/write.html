@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+<div id="wrapper">
+    <!-- 어라 action이 서버쪽 동적 페이지가 아니고 정적 html이 왔어? 이것의 의미는? -->
+    <form method="get" action="write_action.html">
+        <h1>JS와 LS로 맹그는 게시팡</h1>
+        <!--disabled 처리하면 서버로 넘어가지가 않음. hidden이 필요!-->
+        제목 <input type="text" name="n_title" value="흥흥" required><br>
+        지으니 <input type="text" name="n_writer" value="" required><br>
+        내용<br>
+        <textarea name="n_cont" cols="30" rows="10" required></textarea><br>
+        관련언어(맥스 3개까지만)<br>
+        JS<input type="checkbox" name="n_skill" value="js" checked onclick="f3ck(this)" >
+        Java<input type="checkbox" name="n_skill" value="java" onclick="f3ck(this)">
+        Oracle<input type="checkbox" name="n_skill" value="oracle" onclick="f3ck(this)">
+        HTML<input type="checkbox" name="n_skill" value="html" onclick="f3ck(this)">
+        CSS<input type="checkbox" name="n_skill" value="css" onclick="f3ck(this)"><br>
+        <button type="submit">떤송</button>&nbsp;&nbsp;<button type="submit">따시</button>
+    </form>
+</div>
+<script>
+    //체크 박스 맥스 3개까지만 체크 가능하도록 4개째와 함께, 4번째 껀 해제!
+    const maxCnt = 3;
+    let curCnt = 1;  // js가 체크되어 있음!
+    function f3ck(pThis){
+        //css 선택자(pseud 선택자) 사용도 한번 생각
+        //alert(document.querySelectorAll("[name=n_skill]:checked").length);
+
+        if(pThis.checked){
+            curCnt++;      // 체크가 늘었으니 카운트 증가
+        }
+
+        if(!pThis.checked){
+            curCnt--;      // 체크가 늘었으니 카운트 증가
+        }
+
+        if(curCnt > maxCnt) {  // 3개 이상 체크했다면
+            alert("최대 3개만 입력하세요.");
+            pThis.checked = false; // 강제 체크 해제, 마지막 부분 해제
+            curCnt--;              // 늘렸던 카운트 감소
+        }
+        
+    }
+</script>
+</body>
+</html>
