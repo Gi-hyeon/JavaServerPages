@@ -12,9 +12,9 @@
             display: none;
         }
         #mCont{
-            width: 60%;
-            height: 70%;
-            margin: 50px auto;  /* 수평 가운데 정렬 */
+            width: 30%;
+            height: 30%;
+            margin: 100px auto;  /* 수평 가운데 정렬 */
             background-color: orange;
         }
     </style>
@@ -36,8 +36,8 @@
                 Oracle<input type="checkbox" name="n_skill" value="oracle" onclick="f3ck(this)">
                 HTML<input type="checkbox" hgt name="n_skill" value="html" onclick="f3ck(this)">
                 CSS<input type="checkbox" hgt name="n_skill" value="css" onclick="f3ck(this)"><br>
-                <button type="submit" onclick="fsubmit()">수정</button>&nbsp;&nbsp;
-                <button type="submit" onclick="fsubmit()">삭제</button>
+                <button type="submit" onclick="fsubmit('mod')">수정</button>&nbsp;&nbsp;
+                <button type="submit" onclick="fsubmit('del')">삭제</button>
             </form>
         </div>
     </div>
@@ -48,6 +48,20 @@
     </div>
 </body>
 <script>
+    const myForm = document.forms[0];   // id를 안주고 이렇게 써도 된다.
+    function fsubmit(pAct){
+        event.preventDefault(); // submit의 built-in 기능(전송) 막기
+        if(pAct == 'mod'){
+            myForm.action = 'modify_action.html';
+        }
+        
+        if(pAct == 'del'){
+            myForm.action = 'del_action.html';
+        }
+
+        myForm.submit();    // 막았기 때문에 직접 전송!
+    }
+
     // alert(document.querySelectorAll('[hgt]')[1].value);
 
     const myModal = document.querySelector('#modal');
