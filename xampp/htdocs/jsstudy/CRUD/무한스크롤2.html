@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #disp{
+            border: 1px solid black;
+            height: 400px;
+            overflow: auto;
+        }
+    </style>
+</head>
+<body>
+    <div><h1>DOM(document object model)에 무한스크롤 걸기</h1></div>
+    <div id="disp">
+        <script>
+            var tblStr = "<table border=1>";
+            tblStr += "<tbody id='tbody'>";
+            tblStr += "<tr><th>이름</th><th>성격</th></tr>"
+
+            for(let i=0; i<=20; i++){
+                tblStr += "<tr>";
+                tblStr += `<td>홍길일</td><td>ㅇ?${1}</td>`;
+                tblStr += "</tr>";
+            }
+
+            tblStr += "</tbody></table>";
+            document.write(tblStr);
+        </script>
+    </div>
+    <script>
+        const myDisp = document.querySelector('#disp');
+        const myBody = document.querySelector('#tbody');
+
+        function fchk(){
+            var scrollTop = myDisp.scrollTop;
+            var clientHeight = myDisp.clientHeight;
+            var scrollHeight = myDisp.scrollHeight;
+
+            var tunningVal = 50;
+            if((scrollTop + clientHeight) >= (scrollHeight - tunningVal)){
+                for(let i=1; i<=15; i++){
+                    let tr = document.createElement('tr');
+                    tr.innerHTML = `<td>홍길${i}</td><td> ??? ${i+1}</td>`;
+                    myBody.appendChild(tr);
+                }
+            }
+
+        }
+
+        myDisp.addEventListener('scroll', fchk);
+    </script>
+</body>
+</html>
