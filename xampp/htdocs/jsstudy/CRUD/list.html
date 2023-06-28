@@ -41,13 +41,37 @@
             </form>
         </div>
     </div>
-
-    <h1>게시판</h1>
+    
     <div id="wrapper">
+        <h1>게시판</h1>
         <div id="list"></div>
     </div>
 </body>
+
+<script src="./jsp.js"></script>
 <script>
+    // 페이지 나누기(외우지말고, 흐름 생각)
+    /* 
+    페이지 당 몇개 글 출력
+    전체 글 수
+    페이지 수
+    페이지 별로 시작인덱스(글), 끝 인덱스(글) 배열이 담아져 있기 떄문에
+    */
+   
+    const tblName = "uglyGesi";     // 로컬스토리지 테이블 키 값
+    let dataArr = JSON.parse(localStorage.getItem(tblName));    // 데이터 배열
+
+    let page = request.getParameter('page');
+    if(!page){  // 만약 page 정보가 안 넘어 왔다면
+        page = 1;   // 기본 값은 무조건 1 -> 첫 페이지 지정
+    }
+
+    const cntPerPage = 10;
+    let totalGulCnt = dataArr.length;
+    let pageCnt = Math.ceil(totalGulCnt / cntPerPage);   // 올림으로 해결
+    let startGulInx = (page - 1) * cntPerPage;
+    let endGulInx = startGulInx + cntPerPage;    // 반복문 < 쓸거라 -1 필요없음
+    
     const myForm = document.forms[0];   // id를 안주고 이렇게 써도 된다.
     function fsubmit(pAct){
         event.preventDefault(); // submit의 built-in 기능(전송) 막기
@@ -58,26 +82,24 @@
         if(pAct == 'del'){
             myForm.action = 'del_action.html';
         }
-
+        
         myForm.submit();    // 막았기 때문에 직접 전송!
     }
-
+    
     // alert(document.querySelectorAll('[hgt]')[1].value);
-
+    
     const myModal = document.querySelector('#modal');
-    const tblName = "uglyGesi";     // 로컬스토리지 테이블 키 값
-    let dataArr = JSON.parse(localStorage.getItem(tblName));    // 데이터 배열
     const gList = document.querySelector('#list');  // localStorage 데이터 미리 읽어오기
-
-
+    
+    
     function fread(pNum){
         event.preventDefault();     // built-in href 기능 막기
         // 빼먹는 사람들이 있어 변칙적으로 그냥 #을 붙이라고 함(페이지내 이동)
         document.querySelector('[name=n_num]').value = pNum;
-
+        
         myModal.style.display = 'block';    // 눈에 보이게
-
-        for(let i=0; i<dataArr.length; i++){
+        
+        for(let i=startGulInx; i<endGulInx; i++){
             if(dataArr[i].num == pNum){     // 찾던 글
                 document.querySelector('[name=n_title]').value = dataArr[i].title;
                 document.querySelector('[name=n_writer]').value = dataArr[i].writer;
@@ -89,7 +111,7 @@
                     document.querySelector(`[value=${ckArr[j]}]`).checked=true;
                 }
                 console.log(dataArr[i].skills)
-
+                
                 break;  // 이런 걸 안 빼먹는 게 중요하다. 여기선 return 써도 된다.
             }
         }
@@ -98,7 +120,7 @@
     function fList(){
         let tblStr = `<table border=1>`;
             tblStr += `<tr><th>넘버</th><th>제목</th><th>지은이</th><th>날짜</th></tr>`;
-            for(let i=0; i<dataArr.length; i++){
+            for(let i=startGulInx; i<endGulInx; i++){
                 tblStr += `<tr>`;
                 tblStr += `<td>${dataArr[i].num}</td>`;
                 tblStr += `<td><a href='#' onclick="fread('${dataArr[i].num}')">${dataArr[i].title}</a></td>`;
@@ -108,6 +130,13 @@
             }
             tblStr += `</table>`;
             tblStr += `<br><a href='write.html'>새 글쓰기</a>`
+
+            // 페이지 번호 출력하는 부분
+            for(let i=0; i<pageCnt; i++){
+                
+            }
+
+
             gList.innerHTML = tblStr;   // 화면에 뿌리기
     };  // 태그 해석만 끝나면 발생
     
