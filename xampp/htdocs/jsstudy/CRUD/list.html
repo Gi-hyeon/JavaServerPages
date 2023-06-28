@@ -50,7 +50,7 @@
 
 <script src="./jsp.js"></script>
 <script>
-    // 페이지 나누기(외우지말고, 흐름 생각)
+    // 페이지 나누기(외우지말고, 흐름 생각) -> 단순한 게시판이 아니다. 잘 고민
     /* 
     페이지 당 몇개 글 출력
     전체 글 수
@@ -71,6 +71,11 @@
     let pageCnt = Math.ceil(totalGulCnt / cntPerPage);   // 올림으로 해결
     let startGulInx = (page - 1) * cntPerPage;
     let endGulInx = startGulInx + cntPerPage;    // 반복문 < 쓸거라 -1 필요없음
+    if(endGulInx > (totalGulCnt - 1)){  // 마지막 페이지 처리
+        endGulInx = totalGulCnt - 1;
+    }
+
+    console.log("startGulInx -> " + startGulInx + " endGulInx -> " + endGulInx);
     
     const myForm = document.forms[0];   // id를 안주고 이렇게 써도 된다.
     function fsubmit(pAct){
@@ -120,7 +125,7 @@
     function fList(){
         let tblStr = `<table border=1>`;
             tblStr += `<tr><th>넘버</th><th>제목</th><th>지은이</th><th>날짜</th></tr>`;
-            for(let i=startGulInx; i<endGulInx; i++){
+            for(let i=startGulInx; i<=endGulInx; i++){
                 tblStr += `<tr>`;
                 tblStr += `<td>${dataArr[i].num}</td>`;
                 tblStr += `<td><a href='#' onclick="fread('${dataArr[i].num}')">${dataArr[i].title}</a></td>`;
@@ -129,14 +134,16 @@
                 tblStr += `</tr>`;
             }
             tblStr += `</table>`;
-            tblStr += `<br><a href='write.html'>새 글쓰기</a>`
-
+            
             // 페이지 번호 출력하는 부분
-            for(let i=0; i<pageCnt; i++){
-                
+            let pageStr = "";
+            for(let i=1; i<=pageCnt; i++){
+                pageStr += `<a href="list.html?page=${i}">${i}</a>&nbsp;&nbsp;&nbsp;`;
             }
-
-
+            
+            tblStr += pageStr;  // 페이지 출력 리스트 추가
+            
+            tblStr += `<br><a href='write.html'>새 글쓰기</a>`
             gList.innerHTML = tblStr;   // 화면에 뿌리기
     };  // 태그 해석만 끝나면 발생
     
