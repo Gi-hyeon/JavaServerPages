@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #disp{
+            width: 200px;
+            height: 200px;
+            background-color: orange;
+        }
+    </style>
+</head>
+<body>
+    <h1>이미지 미리보기</h1>
+
+    <div id="disp" ondragover="fdover()" ondrop="fdrop()"></div>
+    <script>
+        function fdover(){
+            event.preventDefault();
+        }
+        
+        function fdrop(){
+            event.preventDefault();
+
+            // console.log(event.dataTransfer.files);  // 자동완성X, 잊으면 구글 검색
+            var file = event.dataTransfer.files[0];
+
+            // 파일 읽기 -> 이건 항상 이렇게 거의 세팅으로 봐도 된다.
+            var fileReader = new FileReader();  // 파일 읽어주는 거 생성
+            fileReader.onload = function(){     // 다 읽으면 발생하는 이벤트
+                console.log("이미지 데이터 모습 : ", fileReader.result);
+            }
+            fileReader.readAsDataURL(file);
+
+        }
+    </script>
+</body>
+</html>
