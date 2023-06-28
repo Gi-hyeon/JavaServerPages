@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 모바일이 나오면서 페이지 나누기의 효과가 희미해짐 -> 손가락 터치! -->
+    <script>
+        for(let i=1; i<=20; i++){
+            document.write("<h1>지완이형은 오타왕</h1>");
+        }
+
+        // 스크롤 이벤트
+        window.onscroll = function(){
+            let scrollTop = document.documentElement.scrollTop;
+            let clientHeight = document.documentElement.clientHeight;
+            let scrollHeight = document.documentElement.scrollHeight;
+
+            console.log("scrollTop : ", document.documentElement.scrollTop);
+            console.log("clientHeight : ", document.documentElement.clientHeight);
+            console.log("scrollHeight : ", document.documentElement.scrollHeight);
+            console.log("======================================");
+
+            // 스크롤 바를 끝까지 내렸다면
+            // scrollTop + clientHeight = scrollHeight; 가 되어야 한다.
+            // 실제는 약관의 튜닝값을 넣어서 끝까지 내리기 이전에 필요한 처리를 한다.
+    
+            const tunningVal = 50;  // 50px 전에 발생시키려 한다.
+            if((scrollTop + clientHeight) >= (scrollHeight - tunningVal)){
+                // alert("스트롤 바를 끝까지 내림")
+                // 실제로 여기에 오는 건 대부분 AJAX 방식이다.
+
+                for(let i=1; i<=8; i++){
+                    var h1 = document.createElement('h1');
+                    h1.innerHTML = "ㅇㅇㅇ" + i;
+                    document.body.appendChild(h1);
+                }
+            }
+        }
+
+    </script>
+</body>
+</html>
