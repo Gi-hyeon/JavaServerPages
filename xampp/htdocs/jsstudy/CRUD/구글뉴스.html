@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="fgoogle()">구글뉴스 xml이라 별로...</button>
+
+    <script>
+        function fgoogle(){
+            var xhr = new XMLHttpRequest(); // 심부름꾼 만들기
+            xhr.open("get", " https://news.google.com/rss/search?q=김다미&hl=ko&gl=KR&ceid=KR:ko");
+        }
+    </script>
+</body>
+</html>
