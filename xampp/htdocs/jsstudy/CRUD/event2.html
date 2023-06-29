@@ -42,14 +42,14 @@
             alert("할머니");
         }
         function fmom(){
-            event.stopPropagation;  // 중요! -> 이벤트 캡쳐링, 해당 이벤트만 뽑아서 호출한다.
+            event.stopPropagation();  // 중요! -> 이벤트 캡쳐링, 해당 이벤트만 뽑아서 호출한다.
             alert("엄마");
         }
         function fme(){
             /* event.preventDefault();
             event.target
             event.currentTarget */
-            event.stopPropagation;  // 중요!
+            event.stopPropagation();  // 중요!
             alert("나");
         }
     </script>
