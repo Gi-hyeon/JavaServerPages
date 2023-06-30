@@ -24,23 +24,30 @@
     } 
     */
 
-    var MyPromise = function(){
+    const axios = {};   // 네임스페이스용 객체
+
+    axios.get = function(pURL){         // 메서드
         return new Promise((res, rej)=>{
             // 비동기를 위해 ajax
             var xhr = new XMLHttpRequest();
-            xhr.open('get', 'dummyData.json', true);
+            xhr.open('get', pURL, true);
             xhr.onreadystatechange = function(){
                 if(xhr.readyState == 4 && xhr.status == 200){
                     res(JSON.parse(xhr.responseText));
                 }
+            }
+            xhr.onerror = function(){
+                rej(new Error("에러발생!"));
             }
             xhr.send();
         });
     } 
 
     // Promise 사용 패턴
-    MyPromise().then((rslt)=>{
-        console.log("결과 : " + rslt);
+    var rsltPromise = axios.get("dummyData.json");
+
+    rsltPromise.then((rslt)=>{
+        console.log("결과 : ", rslt);
     }).catch((error)=>{
         console.log("에러 : " + error);
     }).finally(()=>{
