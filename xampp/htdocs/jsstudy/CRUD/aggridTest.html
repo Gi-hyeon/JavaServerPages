@@ -6,7 +6,7 @@
     <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
 </head>
 <body>
-    <div id="myGrid" style="height: 200px; width:550px;" class="ag-theme-alpine"></div>
+    <div id="myGrid" style="height: 50rem; width: 50rem;" class="ag-theme-alpine"></div>
 
     <script>
         const columnDefs = [
@@ -25,11 +25,17 @@
             columnDefs: columnDefs,
             rowData: rowData,
             defaultColDef: {
+                flex:1, // 정렬 -> 깔끔하게 나온다
                 sortable: true,
                 filter: true,
                 resizable: true,
                 minWidth: 100
-            }
+            },
+
+            // 페이지 설정
+            pagination: true,
+            paginationAutoPageSize:true,    // 높이에 맞춰 자동 페이지 설정
+            // paginationPageSize: 5,    // 같이 설정하니 위에 거 우선순위
         };
 
         function getData() {
