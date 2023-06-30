@@ -33,9 +33,31 @@
                 console.log(pArgs[i]);
             }
         }
-         */
 
         fCk("홍길일", "홍길이", "홍길삼", "홍길사");
+         */
+
+        // 구조 분해
+        var hjh = {
+            name : "홍길동",
+            state : "최상",
+            age : "25",
+            special : "인물"
+        }
+
+        // var vName = hjh.name // 원래 방식
+
+        /* var {name, age} = hjh;
+        console.log("체크 -> " + name + ", " + age); */
+
+        var testArr = ["홍길동", "홍길이", "홍길삼", "홍길사"];
+
+        // var [hong,,,] = testArr; // 홍길일 출력
+        var [,hong,,,] = testArr;   // 홍길이 출력
+
+        console.log("check : " + hong)
+
+
     </script>
 </body>
 </html>
