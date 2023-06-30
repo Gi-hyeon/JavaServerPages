@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .card{
+            border: 50px groove gold;
+            width: 150px;
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <!-- cloneNode -->
+    <div class="card">
+        <div name>찬식</div>
+        <div age>30</div>
+        <div song>쉬즈곤</div>
+    </div>
+
+
+    <script>
+        var myCard = document.querySelector('.card');
+        // var clone = myCard.cloneNode();     // 복사, 얇은(shallow) 복사 -> 내용물을 제외하고 복사함
+        var clone = myCard.cloneNode(true);     // 복사, 깊은(deep) 복사 -> 자식까지 전부 복사함
+        clone.querySelector('[name]').innerHTML = "이름1";  // 복사 후 필요한 부분만 바꾸기
+        clone.querySelector('[age]').innerHTML = "나이1";
+        clone.querySelector('[song]').innerHTML = "음악1";
+
+        document.body.appendChild(clone);   // body에 붙여넣기
+    </script>
+</body>
+</html>
