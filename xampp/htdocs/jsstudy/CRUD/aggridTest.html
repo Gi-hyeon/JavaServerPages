@@ -1,48 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Ag-Grid Basic Example</title>
-<script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/ag-grid-community/dist/ag-grid-community.min.js"></script>
 </head>
 <body>
     <div id="myGrid" style="height: 200px; width:550px;" class="ag-theme-alpine"></div>
-<script>
-const columnDefs = [
-//   { field: "make",  headerName:"메이커", sortable:true},    // sortable:true -> 정렬기능 생김
-//   { field: "model", headerName:"모델", sortable:true, filter:true}, // filter:true -> 필터기능 생김
-//   { field: "price", headerName:"가격", resizable:true}  // resizable:true -> 사이즈 조정 가능
-  { field: "make",  headerName:"메이커"},
-  { field: "model", headerName:"모델"},
-  { field: "price", headerName:"가격"}
-];i
 
-// 데이타 정의
-const rowData = [
-  { make: "Toyota", model: "Celica", price: 35000 },
-  { make: "Ford", model: "Mondeo", price: 32000 },
-  { make: "Porsche", model: "Boxster", price: 72000 }
-];
+    <script>
+        const columnDefs = [
+            { field: "name", headerName: "이름" },
+            { field: "alias", headerName: "별명" },
+            { field: "strong", headerName: "장점" },
+            { field: "weak", headerName: "단점" },
+        ];
 
-// 설정 옵션: 중요, 위에 정의한 것들이 여기서 통합됨에 주목
-// 여기서 설정해주면 위 옵션에 줄 필요는 없다...
-const gridOptions = {
-    columnDefs: columnDefs,
-    rowData: rowData,
-    defaultColDef: {
-        sortable: true,
-        filter: true,
-        resizable: true,
-        minWidth: 100
-    }
-};
+        // 데이터 정의, 당장은 필요없다. AJAX로 가져온다.
+        const rowData = [];
 
-// 그리드 셋업
-document.addEventListener('DOMContentLoaded', () => {
-  const gridDiv = document.querySelector('#myGrid');
-  new agGrid.Grid(gridDiv, gridOptions);
-});    
-</script>
+        // 설정 옵션: 중요, 위에 정의한 것들이 여기서 통합됨에 주목
+        // 여기서 설정해주면 위 옵션에 줄 필요는 없다...
+        const gridOptions = {
+            columnDefs: columnDefs,
+            rowData: rowData,
+            defaultColDef: {
+                sortable: true,
+                filter: true,
+                resizable: true,
+                minWidth: 100
+            }
+        };
+
+        function getData() {
+            let xhr = new XMLHttpRequest();
+            xhr.open("get", "dummyData.json", true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    // console.log(xhr.responseText);  // 문자열임 배열로 바꾸려면 JSON.parse
+
+                    var serverArr = JSON.parse(xhr.responseText);
+                    console.log(serverArr);
+                    gridOptions.api.setRowData(serverArr);   // 중요한 메서드
+                }
+            }
+            xhr.send();
+        }
+
+        // 그리드 셋업
+        document.addEventListener('DOMContentLoaded', () => {
+            const gridDiv = document.querySelector('#myGrid');
+            new agGrid.Grid(gridDiv, gridOptions);
+            // 데이터 가져와서 세팅하기
+            getData();
+        });    
+    </script>
 </body>
 </html>
