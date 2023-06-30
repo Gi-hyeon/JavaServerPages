@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<meta charset="UTF-8">
+<!-- <script type="module" src="./firstModule.js"> -->
+<script type="module">
+    import hgd from './firstModule.js';
+    hgd();
+    
+    var hgd2 = "홍길이";
+    window.hgd3 = "홍길삼";
+
+    /* 
+        module에는 2가지가 있는데 commonJS 와 esm
+        commonJS는 자바스크립트 커뮤니티이름으로 require 명령문 사용을 제안
+        esm은 공식모듈로    import 명령문 도입, 향후 이것으로 통일
+        브라우저에서는 import문 사용가능! import(수입) export(수출)는 짝꿍
+    */
+</script>
+
+<script type="module">
+    // hgd();   // 작동 안함
+
+    // 모듈은 안에 갇히는데 왜 사용할까? 분리하기 위해서다.
+    // console.log(hgd2);  // 작동 안함
+
+
+    // mudule이 아닌 거랑은 소통 X, 모듈끼리만 공유가 가능하다 최상위 window.으로
+    console.log(window.hgd3 + "?");  // 이건 가능했는데 막힘?.......
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
