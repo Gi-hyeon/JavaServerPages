@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #disp{
+            width: 200px;
+            height: 200px;
+            background-color: black;
+            color: yellow;
+            font-size: 3em;
+        }
+    </style>
+</head>
+<body>
+    <!-- 탭키를 누르면 순서가 바뀜 -> 서류에 순서랑, 내용이 다를 때 탭 입력하려 입력함(서류알바) -->
+    이름<input type="text" value="" tabindex="1" autofocus><br>
+    나이<input type="text" value="" tabindex="6" ><br>
+    주소<input type="text" value="" tabindex="5" ><br>
+    엄마<input type="text" value="" tabindex="4" ><br>
+    삼촌<input type="text" value="" tabindex="-1" ><br> <!-- 탭 포커스 건너뛰기 -> -1 -->
+    아빠<input type="text" value="" tabindex="2" ><br>
+
+    <!-- div는 focus를 받도록 만들어지지 않았다. focus 받을 수 없는 건 키보드 이벤트 안먹음 -->
+    <!-- focus 없는 애한테 tabindex="0"을 주면 focus 받을 수 있음 -->
+    <div id="disp" tabindex="0" contenteditable onkeydown="fCheck(this)">   <!-- div도 키보드 이벤트 줄 수 있음, contenteditable -> 안에 글 작성 -->
+        키보드 이벤트
+    </div>
+
+
+    <script>
+        function fCheck(pThis){
+            // alert(event.keyCode + pThis);
+        }
+    </script>
+</body>
+</html>
