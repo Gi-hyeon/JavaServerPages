@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style></style>
+</head>
+<body>
+    <!-- <div id="disp"><h1>내일은 토요일</h1></div> -->
+
+    <!-- childNodes 쓰면 위에는 잘 출력되는데 아래는 출력 안됨 -->
+    <div id="disp">
+        <h1>내일은 토요일</h1>
+    </div>
+
+
+
+    <script>
+        // childNodes안 쓰는 것이 아주 좋다.  children 사용 권장
+        // children은 무조건 element 타입(태그)만 가져온다.
+        const myDisp = document.querySelector('#disp');
+        console.log("0", myDisp.childNodes[0]);
+        console.log("0", myDisp.children[0]);   // 변하지 않아 이걸 써야 좋음
+
+    </script>
+</body>
+</html>
